@@ -436,6 +436,61 @@ Not implemented
 <details>
 <summary>Settings</summary>
 
+### Clear Pending Emails
+
+### Delete Notification Recipient
+
+```PowerShell
+Remove-S1Recipients -ID <id>
+```
+
+### Get AD FQDNs
+
+### GET AD Settings
+
+### Get Notification Recipients
+
+```PowerShell
+Get-S1Recipients
+```
+
+### Get Notification Settings
+
+```PowerShell
+Get-S1Notifications
+```
+
+### Get SMTP Settings
+
+### Get SSO Settings
+
+### Get Syslog Settings
+
+### Set AD FQDNs
+
+### Set AD Settings
+
+### Set Notification Recipients
+
+```PowerShell
+Set-S1Notifications
+```
+
+### Set SMTP Settings
+
+### Set SSO Settings
+
+### Set Syslog Settings
+
+### Test AD Settings
+
+### Test SMTP Settings
+
+### Test SSO Settings
+
+### Test Syslog Settings
+
+
 </details>
 
 <details>
