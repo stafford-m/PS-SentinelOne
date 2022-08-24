@@ -1,11 +1,11 @@
-function Set-S1Recipient {
+function Get-S1Recipient {
 	<#
 	.NOTES
 		Author:			Chris Stone <chris.stone@nuwavepartners.com>
-		Date-Modified:	2022-08-24 14:34:12
+		Date-Modified:	2022-08-24 14:19:45
 
 	.SYNOPSIS
-		Change/Create Recipient for Notifications
+		Get Recipients for Notifications
 
 	.PARAMETER AccountID
 		Filter settings by Account scope
@@ -33,20 +33,20 @@ function Set-S1Recipient {
 		$AccountID,
 
 		[Parameter(Mandatory=$False)]
-		[String[]]
-		$SiteID,
-
-		[Parameter(Mandatory=$False)]
 		[String]
 		$Email,
 
 		[Parameter(Mandatory=$False)]
 		[String]
-		$ID,
+		$Name,
 
 		[Parameter(Mandatory=$False)]
 		[String]
-		$Name,
+		$Query,
+
+		[Parameter(Mandatory=$False)]
+		[String[]]
+		$SiteID,
 
 		[Parameter(Mandatory=$False)]
 		[String]
@@ -59,23 +59,16 @@ function Set-S1Recipient {
 		Write-Log -Message $InitializationLog -Level Informational
 
 		$URI = "/web/api/v2.1/settings/recipients"
+		$Parameters = @{}
+		if ($AccountID) { $Parameters.Add("accountIds", ($AccountID -join ",")) }
+		if ($Email)		{ $Parameters.Add("email", $Email) }
+		if ($Name)		{ $Parameters.Add("name", $name) }
+		if ($Query)		{ $Parameters.Add("query", $Query) }
+		if ($SiteID)	{ $Parameters.Add("SiteID", ($SiteID -join ",")) }
+		if ($SMS)		{ $Parameters.Add("sms", $SMS) }
+		$Response = Invoke-S1Query -URI $URI -Method GET -Parameters $Parameters
 
-		$Body = @{
-			data = @{}
-			filter = @{}
-		}
-
-		If ($AccountID)	{ $Body.filter += @{ accountIds = ($AccountID -join ',') } }
-		If ($SiteID)	{ $Body.filter += @{ SiteID = ($SiteID -join ',') } }
-
-		If ($Email)		{ $Body.data += @{ email = ($Email) } }
-		If ($ID)		{ $Body.data += @{ id = ($ID) } }
-		If ($Name)		{ $Body.data += @{ name = ($Name) } }
-		If ($SMS)		{ $Body.data += @{ sms = ($SMS) } }
-
-		$Response = Invoke-S1Query -URI $URI -Method PUT -Body ($Body | ConvertTo-Json -Compress) -ContentType 'application/json'
-
-		Write-Output $Response.data
+		Write-Output $Response.data.recipients
 
 	}
 }

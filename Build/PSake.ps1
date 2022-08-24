@@ -70,9 +70,6 @@ Task Test -depends Init  {
 
 Task Build -depends Test {
 
-	Write-Output "Documentation"
-	Invoke-PSDocument -Path "$PSScriptRoot\Doc\" -OutputPath "$PSScriptRoot\"
-
 	Write-Output "Updating Module Manifest:"
 	Write-Output "    Functions"
 	Set-ModuleFunction
