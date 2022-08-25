@@ -1,15 +1,12 @@
 function Remove-S1Site {
     <#
     .NOTES
-        Author:			Michael Stafford
+        Author:			Michael Stafford <mstafford13@email.davenport.edu>
         Date-Modified:	2022-08-25 11:21:46
-    
     .SYNOPSIS
         Delete SentinelOne site
-
     .PARAMETER ID
         Site's ID number as a string
-
     #>
 
     [CmdletBinding(DefaultParameterSetName="All")]
