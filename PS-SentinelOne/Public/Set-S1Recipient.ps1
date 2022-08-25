@@ -2,7 +2,7 @@ function Set-S1Recipient {
 	<#
 	.NOTES
 		Author:			Chris Stone <chris.stone@nuwavepartners.com>
-		Date-Modified:	2022-08-24 14:34:12
+		Date-Modified:	2022-08-25 10:34:20
 
 	.SYNOPSIS
 		Change/Create Recipient for Notifications
@@ -66,7 +66,7 @@ function Set-S1Recipient {
 		}
 
 		If ($AccountID)	{ $Body.filter += @{ accountIds = ($AccountID -join ',') } }
-		If ($SiteID)	{ $Body.filter += @{ SiteID = ($SiteID -join ',') } }
+		If ($SiteID)	{ $Body.filter += @{ siteIds = ($SiteID -join ',') } }
 
 		If ($Email)		{ $Body.data += @{ email = ($Email) } }
 		If ($ID)		{ $Body.data += @{ id = ($ID) } }

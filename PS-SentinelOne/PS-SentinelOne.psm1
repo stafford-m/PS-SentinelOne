@@ -2,11 +2,11 @@
 $ModulePath = Split-Path $MyInvocation.MyCommand.Path -Parent
 $Public  = @( Get-ChildItem -Path $ModulePath\Public\*.ps1 -ErrorAction SilentlyContinue )
 $Private = @( Get-ChildItem -Path $ModulePath\Private\*.ps1 -ErrorAction SilentlyContinue )
-Foreach ($import in @($Public + $Private)) {
+Foreach ($Import in @($Public + $Private)) {
 	Try {
-		. $import.fullname
+		. $Import.FullName
 	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+		Write-Error -Message "Failed to import function $($Import.FullName): $_"
 	}
 }
 Export-ModuleMember -Function $Public.Basename
