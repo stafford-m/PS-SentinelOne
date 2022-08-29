@@ -39,7 +39,7 @@ function New-S1Site {
 
         [parameter(Mandatory=$True)]
         [String]
-        $AccountID,
+        $AccountId,
 
         [parameter(Mandatory=$False)]
         [String]
@@ -90,7 +90,7 @@ function New-S1Site {
                 isDefault = $IsDefault
                 inherits = $Inherits
                 accountName = $AccountName
-                accountId = $AccountID
+                accountId = $AccountId
                 description = $Description
                 licenses = $Licenses
             }

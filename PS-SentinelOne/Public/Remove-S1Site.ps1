@@ -13,7 +13,7 @@ function Remove-S1Site {
     param(
         [Parameter(Mandatory=$True)]
         [String]
-        $ID
+        $SiteId
     )
     Process {
         # Log the function and parameters being executed
@@ -21,7 +21,7 @@ function Remove-S1Site {
         $MyInvocation.BoundParameters.GetEnumerator() | ForEach-Object { $InitializationLog += " -$($_.Key) $($_.Value)"}
         Write-Log -Message $InitializationLog -Level Informational
 
-        $URI = "/web/api/v2.1/sites/$ID"
+        $URI = "/web/api/v2.1/sites/$SiteId"
 
         $Response = Invoke-S1Query -URI $URI -Method DELETE
 

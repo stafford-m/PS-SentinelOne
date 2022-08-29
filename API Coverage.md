@@ -496,6 +496,16 @@ Set-S1Notifications
 <details>
 <summary>Sites</summary>
 
+### New Site
+```PowerShell
+New-S1Site
+```
+
+### Remove Site
+```PowerShell
+Remove-S1Site -SiteId
+```
+
 </details>
 
 <details>
