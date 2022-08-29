@@ -5,6 +5,7 @@ function New-S1Site {
         Date-Modified:	2022-08-25 15:23:54
     .SYNOPSIS
         Adds a new site in SentinelOne
+        
     #>
     [CmdletBinding(DefaultParameterSetName="All")]
     Param(
@@ -44,9 +45,17 @@ function New-S1Site {
         [String]
         $Description,
 
-        [arameter(Mandatory=$True)]
-        [hashtable[]]
-        $Licenses
+        [parameter(Mandatory=$True)]
+        [String]
+        $SKUName,
+
+        [parameter(Mandatory=$True)]
+        [String]
+        $TotalAgentsName,
+
+        [parameter(Mandatory=$True)]
+        [Int]
+        $Count
     )
     Process {
         # Log the function and parameters being executed
@@ -55,6 +64,22 @@ function New-S1Site {
         Write-Log -Message $InitializationLog -Level Informational
 
         $URI = "/web/api/v2.1/sites"
+
+
+        $Surfaces = @(@{
+            name = $TotalAgentsName
+            count = $Count
+          })
+          
+          $Bundles = @(@{
+            name = $SKUName
+            surfaces = $Surfaces
+          })
+          
+          $Licenses = @{
+            bundles = $Bundles
+          }
+        
 
         $Body = @{
             data = @{
@@ -71,7 +96,6 @@ function New-S1Site {
             }
         }
 
-        
         $Response = Invoke-S1Query -URI $URI -Method POST -Body ($Body | ConvertTo-Json -Depth 99) -ContentType "application/json"
         Write-Output $Response.data
     }
