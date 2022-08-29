@@ -65,22 +65,6 @@ function New-S1Site {
 
         $URI = "/web/api/v2.1/sites"
 
-
-        $Surfaces = @(@{
-            name = $TotalAgentsName
-            count = $Count
-          })
-          
-          $Bundles = @(@{
-            name = $SKUName
-            surfaces = $Surfaces
-          })
-          
-          $Licenses = @{
-            bundles = $Bundles
-          }
-        
-
         $Body = @{
             data = @{
                 name = $SiteName
@@ -92,7 +76,15 @@ function New-S1Site {
                 accountName = $AccountName
                 accountId = $AccountId
                 description = $Description
-                licenses = $Licenses
+                licenses = @{
+                    bundles = @(@{
+                        name = $SKUName
+                        surfaces = @(@{
+                            name = $TotalAgentsName
+                            count = $Count
+                        })
+                    })
+                }
             }
         }
 
